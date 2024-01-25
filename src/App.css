@@ -46,4 +46,23 @@
   padding: 20px;
   justify-content: center;
   position: fixed ;
+
+}
+.results{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vs{
+  font-size: 32px;
+  transform: rotate(-15deg);
+}
+.user{
+  font-size: 40px;
+}
+.computer{
+  font-size: 40px;
+}
+h2{
+  font-size: 45px;
 }

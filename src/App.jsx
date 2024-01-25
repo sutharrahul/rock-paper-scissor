@@ -1,52 +1,27 @@
-import { useState } from "react";
-import paperIcon from "./assets/paper.png";
-import rockIcon from "./assets/rock.png";
-import scissorIcon from "./assets/scissor.png";
-
+import Icon from "./Icon";
 import "./App.css";
-import { genrateRPS } from "./game-logic";
+import useRockPaperScissor from "./useRockPaperScissor";
 
 function App() {
-  const [result, setResult] = useState("Let Start...");
-
-  function rpsClickHandler(rpsValue) {
-    const randomRps = genrateRPS();
-    console.log(rpsValue, randomRps);
-    if (randomRps == rpsValue) {
-      setResult("Match Draw!!");
-    } else if (
-      (rpsValue == "rock" && randomRps == "sicssor") ||
-      (rpsValue == "paper" && randomRps == "rock") ||
-      (rpsValue == "sicssor" && randomRps == "paper")
-    ) {
-      setResult("Congrats You Won!! 🎉");
-    } else {
-      setResult("Opps!!, Hard luck, Try Again 😥");
-    }
-  }
+  const { rpsClickHandler, user, computer, result } = useRockPaperScissor();
 
   return (
-    <>
-      <div>
-        <a href="javascript:void(0)" onClick={() => rpsClickHandler("rock")}>
-          <img src={rockIcon} className="logo react" alt="Rock" />
-        </a>
-        <a href="javascript:void(0)" onClick={() => rpsClickHandler("paper")}>
-          <img src={paperIcon} className="logo react" alt="Paper" />
-        </a>
-        <a href="javascript:void(0)" onClick={() => rpsClickHandler("sicssor")}>
-          <img src={scissorIcon} className="logo" alt="Sicssor" />
-        </a>
-      </div>
+    <div>
+      {user && computer && (
+        <div className="results">
+          <span className="user">You</span>
+          <Icon icon={user} />
+          <span className="vs">vs</span>
+          <Icon icon={computer} />
+          <span className="computer">Computer</span>
+        </div>
+      )}
       <h2>{result}</h2>
-      {/* <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div> */}
+      <div>
+        <Icon icon={"rock"} onClick={() => rpsClickHandler("rock")} />
+        <Icon icon={"paper"} onClick={() => rpsClickHandler("paper")} />
+        <Icon icon={"sicssor"} onClick={() => rpsClickHandler("sicssor")} />
+      </div>
       <footer className="footer">
         Create with 💜by{" "}
         <a href="https://github.com/sutharrahul">@sutharrahul</a>,<br /> Visit
@@ -54,7 +29,7 @@ function App() {
         <a href="https://sutharrahul.github.io">sutharrahul.github.io</a> to
         learn more
       </footer>
-    </>
+    </div>
   );
 }
 
